@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import './App.css'
+import toTwoDecimals from './utils/toTwoDecimals'
 
 function App() {
+  const [input, setInput] = useState('')
+  const [num, setNum] = useState(12.55555)
+
+  useEffect(() => {
+    let newNum = toTwoDecimals(num)
+    setNum(newNum)
+  }, [num])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <h2>type in your favorite color</h2>
+        <input type='text' placeholder='color' onChange={e => setInput(e.target.value)}/>
+        <div style={{
+          'height' : 300,
+          'width': '100vw',
+          'backgroundColor': `${input}`
+        }}/>
+        <h1>{num}</h1>
+        <button>submit</button>
     </div>
   );
 }
 
-export default App;
+export default App
